@@ -38,8 +38,7 @@
                     <p class="card-text">{{ $item->contact }}</p>
                     <p class="card-text">{{ $item->status }}</p>
                     @if($item->idUser == Auth::user()->id)
-{{--                        {{ route('create', $item->idAds) }}--}}
-                        <a href="#" class="link-danger">Изменить</a> | <a href="#" class="link-danger">Удалить</a>
+                        <a href="{{ route('update', $item->idAds) }}" class="link-danger">Изменить</a> | <a href="{{ route('destroy-ads', $item->idAds) }}" class="link-danger">Удалить</a>
                     @endif
                 </div>
             </div>

@@ -14,22 +14,24 @@
 Auth::routes();
 
 
-//объявления
+
 Route::get('/', 'Ads\AdsController@index');
 Route::get('ads/{category}', 'Ads\AdsController@sortCategory');
 
 
-//объявления
-
-// create form
 Route::get('create', function () {
     return view('ads.create');
 })->name('create');
-// post form
+
 Route::post('/create/submit', 'Ads\AdsController@store')->name('create-ads-submit');
 
+Route::get('update/{id}', 'Ads\AdsController@show')->name('update');
 
-//user
+Route::post('/update/{id}', 'Ads\AdsController@update')->name('update-ads-submit');
+
+Route::get('/destroy/{id}', 'Ads\AdsController@destroy')->name('destroy-ads');
+
+
 Route::get('/profile', function () {
     return view('profile');
 });

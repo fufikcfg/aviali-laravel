@@ -17,7 +17,15 @@ class AdsController extends Controller
 
     public function sortCategory($category) {
         $ads = Ads::query()->where('category', $category)->orderBy('idAds', 'desc')->get();
+
         return view('welcome', compact('ads'));
+    }
+
+    public function show($id)
+    {
+        $adsData = Ads::query()->where('idAds', $id)->get();
+
+        return view('ads.update', compact('adsData'));
     }
 
     public function store(Request $request)
@@ -37,6 +45,28 @@ class AdsController extends Controller
         $ads->save();
 
         return redirect('/');
+    }
 
+    public function update($id, Request $request)
+    {
+        $ads = Ads::query()->where('idAds', $id)->first();
+
+        $ads->name = $request->input('name');
+        $ads->category = $request->input('category');
+        $ads->price = $request->input('price');
+
+        $ads->description = $request->input('description');
+        $ads->status = $request->input('status');
+
+        $ads->save();
+
+        return redirect('/');
+    }
+
+    public function destroy($id)
+    {
+        $ads = Ads::query()->where('idAds', $id)->delete();
+
+        return redirect('/');
     }
 }
