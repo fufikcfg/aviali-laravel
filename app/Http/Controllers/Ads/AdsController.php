@@ -5,31 +5,38 @@ namespace App\Http\Controllers\Ads;
 use App\Models\Ads;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdsController extends Controller
 {
     public function index() {
-
-//        switch ($_GET['category']) {
-//            case 'auto':
-//                $ads = Ads::all()->reverse()->where('category', 'Авто');
-//                break;
-//            case 'forhome':
-//                $category = 'Вещи для дома';
-//                break;
-//            default:
-//                $ads = Ads::all()->reverse();
-//                break;
-//        }
-
-//        dd($_GET['category']);
-//        $category = "Авто";
-        $ads = Ads::all()->reverse();
+        $ads = DB::table('ads')->orderBy('idAds', 'desc')->get();
         return view('welcome', compact('ads'));
     }
 
-    public function show($id)
+    public function sortCategory($category) {
+        $ads = Ads::query()->where('category', $category)->orderBy('idAds', 'desc')->get();
+        return view('welcome', compact('ads'));
+    }
+
+    public function store(Request $request)
     {
-        //
+        $ads = new Ads();
+
+        $ads->name = $request->input('name');
+        $ads->category = $request->input('category');
+        $ads->price = $request->input('price');
+
+        $ads->description = $request->input('description');
+        $ads->contact = Auth::user()->numberPhone;
+        $ads->status = 'Активно';
+
+        $ads->idUser = Auth::user()->id;
+
+        $ads->save();
+
+        return redirect('/');
+
     }
 }

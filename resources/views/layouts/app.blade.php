@@ -69,7 +69,7 @@
                             </li>
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="?mode=ads-create">Создать объявление</a>
+                                    <a class="nav-link" href="{{ route('create') }} ">Создать объявление</a>
                                 </li>
                             </ul>
                         @endguest

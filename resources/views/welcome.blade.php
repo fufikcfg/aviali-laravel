@@ -3,16 +3,16 @@
 @section('content')
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="?category=auto">Авто</a>
+            <a class="nav-link" href={{url("/ads/Авто")}}>Авто</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="?mode=ads&category=property">Недвижимость</a>
+            <a class="nav-link" href="{{url("/ads/Недвижимость")}}">Недвижимость</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/{services}">Услуги</a>
+            <a class="nav-link" href="{{url("/ads/Услуги")}}">Услуги</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="?category=forhome">Вещи для дома</a>
+            <a class="nav-link" href="{{url("/ads/Вещи для дома")}}">Вещи для дома</a>
         </li>
     </ul>
     @empty(Auth::user())
@@ -38,6 +38,7 @@
                     <p class="card-text">{{ $item->contact }}</p>
                     <p class="card-text">{{ $item->status }}</p>
                     @if($item->idUser == Auth::user()->id)
+{{--                        {{ route('create', $item->idAds) }}--}}
                         <a href="#" class="link-danger">Изменить</a> | <a href="#" class="link-danger">Удалить</a>
                     @endif
                 </div>
