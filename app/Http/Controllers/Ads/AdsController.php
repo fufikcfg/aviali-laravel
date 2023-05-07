@@ -32,6 +32,12 @@ class AdsController extends Controller
     {
         $ads = new Ads();
 
+        $this->validate($request, [
+            'name' => 'required|unique:posts|min:5|max:25',
+            'price' => 'required|unique:posts|min:1|max:10',
+            'description' => 'required|unique:posts|min:25|max:225',
+        ]);
+
         $ads->name = $request->input('name');
         $ads->category = $request->input('category');
         $ads->price = $request->input('price');
@@ -50,6 +56,12 @@ class AdsController extends Controller
     public function update($id, Request $request)
     {
         $ads = Ads::query()->where('idAds', $id)->first();
+
+        $this->validate($request, [
+            'name' => 'required|unique:posts|min:5|max:25',
+            'price' => 'required|unique:posts|min:1|max:10',
+            'description' => 'required|unique:posts|min:25|max:225',
+        ]);
 
         $ads->name = $request->input('name');
         $ads->category = $request->input('category');

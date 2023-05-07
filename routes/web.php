@@ -16,6 +16,7 @@ Auth::routes();
 
 
 Route::get('/', 'Ads\AdsController@index');
+
 Route::get('ads/{category}', 'Ads\AdsController@sortCategory');
 
 
