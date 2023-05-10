@@ -33,9 +33,9 @@ class AdsController extends Controller
         $ads = new Ads();
 
         $this->validate($request, [
-            'name' => 'required|unique:posts|min:5|max:25',
-            'price' => 'required|unique:posts|min:1|max:10',
-            'description' => 'required|unique:posts|min:25|max:225',
+            'name' => 'required|unique:ads|min:5|max:25',
+            'price' => 'required|unique:ads|min:1|max:10',
+            'description' => 'required|unique:ads|min:10|max:225',
         ]);
 
         $ads->name = $request->input('name');
@@ -58,9 +58,9 @@ class AdsController extends Controller
         $ads = Ads::query()->where('idAds', $id)->first();
 
         $this->validate($request, [
-            'name' => 'required|unique:posts|min:5|max:25',
-            'price' => 'required|unique:posts|min:1|max:10',
-            'description' => 'required|unique:posts|min:25|max:225',
+            'name' => 'required|unique:ads|min:5|max:25',
+            'price' => 'required|unique:ads|min:1|max:10',
+            'description' => 'required|unique:ads|min:25|max:225',
         ]);
 
         $ads->name = $request->input('name');
