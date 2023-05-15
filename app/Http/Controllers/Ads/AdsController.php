@@ -47,7 +47,7 @@ class AdsController extends BaseController
 
     public function destroy($id)
     {
-        $ads = Ads::query()->where('idAds', $id)->delete();
+        $this->service->destroy($id);
 
         return back()->withInput();
     }

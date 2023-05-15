@@ -50,4 +50,9 @@ class Service
         $data += $this->getDefaultValueForAds();
         Ads::create($data);
     }
+
+    public function destroy($id)
+    {
+        Ads::find($id)->delete();
+    }
 }
