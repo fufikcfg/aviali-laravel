@@ -47,7 +47,7 @@ class Service
 
     public function store($data)
     {
-        $data += $this->getDefaultValueForAds();
+        $data += $this->getRequiredValueForAds();
         Ads::create($data);
     }
 
