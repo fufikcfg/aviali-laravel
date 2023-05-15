@@ -11,7 +11,7 @@
         </div>
     @endif
     @foreach($adsData as $item)
-        <form action="{{ route('update-ads-submit', $item->idAds) }}" method="post">
+        <form action="{{ route('updating', $item->id) }}" method="post">
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -29,18 +29,19 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="inputState">Категория</label>
-                <select name="category" class="form-select" id="select-class" aria-label="Default select example">
-                    <option value="Авто">Авто</option>
-                    <option value="Недвижимость">Недвижимость</option>
-                    <option value="Услуги">Услуги</option>
-                    <option value="Вещи для дома">Вещи для дома</option>
+                <select name="category_id" class="form-select" id="select-class" aria-label="Default select example">
+
+                    <option value="1" {{ $item->category_id == 1 ? 'selected' : '' }}>Авто</option>
+                    <option value="2" {{ $item->category_id == 2 ? 'selected' : '' }}>Недвижимость</option>
+                    <option value="3" {{ $item->category_id == 3 ? 'selected' : '' }}>Услуги</option>
+                    <option value="4" {{ $item->category_id == 4 ? 'selected' : '' }}>Вещи для дома</option>
                 </select>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputState">Статус</label>
-                <select name="status" class="form-select status-select" id="select-class" aria-label="Default select example">
-                    <option value="Активно">Активно</option>
-                    <option value="Неактивно">Неактивно</option>
+                <select name="status_id" class="form-select status-select" id="select-class" aria-label="Default select example">
+                    <option value="1" {{ $item->status_id == 1 ? 'selected' : '' }}>Активно</option>
+                    <option value="2" {{ $item->status_id == 2 ? 'selected' : '' }}>Неактивно</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-create-ads">Изменить</button>

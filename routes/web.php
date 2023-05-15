@@ -11,31 +11,33 @@
 |
 */
 
+use App\Http\Controllers\Ads\AdsController;
+
 Auth::routes();
-
-
 
 Route::get('/', 'Ads\AdsController@index');
 
 Route::get('ads/{category}', 'Ads\AdsController@sortCategory');
 
+Route::group(['middleware' => 'auth'], function () {
 
-Route::get('create', function () {
-    return view('ads.create');
-})->name('create');
+    Route::get('create', function () {
+        return view('ads.create');
+    })->name('create');
 
-Route::post('/create/submit', 'Ads\AdsController@store')->name('create-ads-submit');
+    Route::post('/ads/create/submit', [AdsController::class, 'store'])->name('create-ads-submit');
 
-Route::get('update/{id}', 'Ads\AdsController@show')->name('update');
+    Route::get('/ads/destroy/{id}', [AdsController::class, 'destroy'])->name('destroy-ads');
 
-Route::post('/update/{id}', 'Ads\AdsController@update')->name('update-ads-submit');
+    Route::get('/ads/update/{id}', [AdsController::class, 'show'])->name('update');
 
-Route::get('/destroy/{id}', 'Ads\AdsController@destroy')->name('destroy-ads');
+    Route::post('/ads/updating/{id}', [AdsController::class, 'update'])->name('updating');
 
-
-Route::get('/profile', function () {
-    return view('profile');
+    Route::get('/ads/profile', function () {
+        return view('profile');
+    });
 });
+
 
 
 

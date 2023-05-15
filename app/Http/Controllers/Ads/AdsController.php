@@ -2,40 +2,41 @@
 
 namespace App\Http\Controllers\Ads;
 
+use App\Http\Requests\Ads\StoreRequest;
+use App\Http\Requests\Ads\UpdateRequest;
 use App\Models\Ads;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-class AdsController extends Controller
+class AdsController extends BaseController
 {
     public function index() {
-        $ads = DB::table('ads')->orderBy('idAds', 'desc')->get();
+        $ads = $this->service->getAllAds();
+
         return view('welcome', compact('ads'));
     }
 
-    public function sortCategory($category) {
-        $ads = Ads::query()->where('category', $category)->orderBy('idAds', 'desc')->get();
+    public function sortCategory($category)
+    {
+        $ads = $this->service->getSortByCategory($category);
 
         return view('welcome', compact('ads'));
     }
 
     public function show($id)
     {
-        $adsData = Ads::query()->where('idAds', $id)->get();
+        $adsData = $this->service->getDataForEdit($id);
 
         return view('ads.update', compact('adsData'));
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $ads = new Ads();
 
         $this->validate($request, [
-            'name' => 'required|unique:ads|min:5|max:25',
-            'price' => 'required|unique:ads|min:1|max:10',
-            'description' => 'required|unique:ads|min:10|max:225',
+            'name' => 'required|min:5|max:25',
+            'price' => 'required|min:1|max:10',
+            'description' => 'required|min:10|max:225',
         ]);
 
         $ads->name = $request->input('name');
@@ -50,27 +51,12 @@ class AdsController extends Controller
 
         $ads->save();
 
-        return redirect('/');
+        return back()->withInput();
     }
 
-    public function update($id, Request $request)
+    public function update(UpdateRequest $request, $id)
     {
-        $ads = Ads::query()->where('idAds', $id)->first();
-
-        $this->validate($request, [
-            'name' => 'required|unique:ads|min:5|max:25',
-            'price' => 'required|unique:ads|min:1|max:10',
-            'description' => 'required|unique:ads|min:25|max:225',
-        ]);
-
-        $ads->name = $request->input('name');
-        $ads->category = $request->input('category');
-        $ads->price = $request->input('price');
-
-        $ads->description = $request->input('description');
-        $ads->status = $request->input('status');
-
-        $ads->save();
+        $this->service->updateAds($request->validated(), $id);
 
         return redirect('/');
     }
@@ -79,6 +65,6 @@ class AdsController extends Controller
     {
         $ads = Ads::query()->where('idAds', $id)->delete();
 
-        return redirect('/');
+        return back()->withInput();
     }
 }
