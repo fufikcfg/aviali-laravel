@@ -28,11 +28,11 @@
         </div>
         <div class="form-group col-md-4">
             <label for="inputState">Категория</label>
-            <select name="category" class="form-select" id="select-class" aria-label="Default select example">
-                <option value="Авто">Авто</option>
-                <option value="Недвижимость">Недвижимость</option>
-                <option value="Услуги">Услуги</option>
-                <option value="Вещи для дома">Вещи для дома</option>
+            <select name="category_id" class="form-select" id="select-class" aria-label="Default select example">
+                <option value="1">Авто</option>
+                <option value="2">Недвижимость</option>
+                <option value="3">Услуги</option>
+                <option value="4">Вещи для дома</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary btn-create-ads">Создать</button>

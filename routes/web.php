@@ -15,9 +15,10 @@ use App\Http\Controllers\Ads\AdsController;
 
 Auth::routes();
 
-Route::get('/', 'Ads\AdsController@index');
+Route::get('/', [AdsController::class, 'index']);
 
-Route::get('ads/{category}', 'Ads\AdsController@sortCategory');
+Route::get('ads/{category}', [AdsController::class, 'sortCategory']);
+
 
 Route::group(['middleware' => 'auth'], function () {
 
