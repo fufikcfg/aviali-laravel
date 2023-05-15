@@ -35,7 +35,7 @@ class AdsController extends BaseController
 
         $this->service->store($data);
 
-        return back()->withInput();
+        return redirect('/');
     }
 
     public function update(UpdateRequest $request, $id)

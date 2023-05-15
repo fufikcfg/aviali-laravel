@@ -36,7 +36,7 @@ class Service
             ->update($data);
     }
 
-    public function getDefaultValueForAds()
+    public function getRequiredValueForAds()
     {
         return [
             'status_id' => 1,
